@@ -1,0 +1,34 @@
+<div class="container">
+  <h1><a href="/">Welcome to Z and J's list!</a></h1>
+ 
+  <% if @post %>
+    <% post = Post.find(@post) %>
+    <% cat_name = Category.where('id=?', post.category_id).first.name %>
+    <h3><a href="/?category=<%=cat_name%>"><%= cat_name %></a></h3>
+    <br>
+    <B>Title:</B> <%= post.title %>
+    <br>
+    <B>Content:</B> <%= post.content %>
+    <br>
+    <B>Price:</B> <%= post.price %>
+
+  <% elsif @category %>
+  <h3> <%= @category %> </h3>
+    <ul>
+      <% cat_id = Category.where('name=?', @category)[0].id %>
+      <% Post.where('category_id=?', cat_id).each do |post| %>
+        <li><a href="/?post=<%=post.id%>"> <%=post.title %></a></li>
+      <% end %>
+    </ul>
+    <br>
+    <br>
+    <a href="/new_post">Add a new post, Bra!</a>
+  <% else %>
+  <ul>
+    <% Category.all.each do |category| %>
+      <li><a href="/?category=<%=category.name%>"> <%= category.name %></a></li>
+    <% end %>
+  </ul>
+</div>
+
+<% end %>

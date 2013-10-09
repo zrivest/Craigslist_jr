@@ -1,0 +1,18 @@
+<h1>Create a New Post, Already!</h1>
+
+<form action="/new_post" method="post">
+  <b>Title <input type="text" name="newpost[title]">
+    <br>
+    Content <textarea name="newpost[content]"></textarea>
+    <br>
+    Price <input type="text" name="newpost[price]">
+    <br>
+    Email <input type="text" name="newpost[email]">
+    <br>
+    Category <select name="newpost[category_id]">
+      <% Category.all.each do |category| %>
+        <option value=<%= category.id %>><%= category.name %></option>
+      <% end %>
+  </b>
+  <input type="submit" value="POST THAT SHIT">
+</form>

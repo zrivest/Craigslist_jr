@@ -1,0 +1,38 @@
+<div class="container">
+  <h1><a href="/">Welcome to Z and J's list!</a></h1>
+   <% post = @post %>
+    <% cat_name = Category.where('id=?', post.category_id).first.name %>
+    <h3><a href="/?category=<%=cat_name%>"><%= cat_name %></a></h3>
+    
+    <h3> Edit your post </h3>
+    <br>
+    <B>Title:</B> <%= post.title %>
+    <br>
+    <B>Content:</B> <%= post.content %>
+    <br>
+    <B>Price:</B> <%= post.price %>
+</div>
+
+<form action="/edit" method="post">
+  <b>Title <input type="text" name="editpost[title]">
+    <br>
+    Content <textarea name="editpost[content]"></textarea>
+    <br>
+    Price <input type="text" name="editpost[price]">
+    <br>
+    Email <input type="text" name="editpost[email]">
+    <br>
+    Category <select name="editpost[category_id]">
+      <% Category.all.each do |category| %>
+        <option value=<%= category.id %>><%= category.name %></option>
+      <% end %>
+  </b>
+  <input style="display:none" type="text" name="post_id" value=<%=@post.id%>>
+  <input type="submit" value="EDIT THAT SHIT">
+</form>
+
+<br>
+<form action="/edit" method="post">
+  <input style="display:none" type="text" name="post_id" value=<%=@post.id%>>
+  <input type="submit" value="DELETE THAT SHIT" name="delete">
+</form>
